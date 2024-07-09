@@ -1,1 +1,15 @@
-export class CreateClassDto {}
+import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
+
+export class CreateClassDto {
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(50)
+  @MinLength(2)
+  name: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(2)
+  @MaxLength(50)
+  description: string;
+}
