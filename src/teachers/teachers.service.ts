@@ -21,7 +21,7 @@ export class TeachersService {
     return this.teacherRepository.find();
   }
 
-  async findOne(id: string): Promise<Teacher> {
+  async findOne(id: number): Promise<Teacher> {
     const teacher = await this.teacherRepository.findOne({ where: { id } });
     if (!teacher) {
       throw new NotFoundException(`Teacher with ID ${id} not found`);
@@ -30,7 +30,7 @@ export class TeachersService {
   }
 
   async update(
-    id: string,
+    id: number,
     updateTeacherDto: UpdateTeacherDto,
   ): Promise<Teacher> {
     const teacher = await this.findOne(id);
@@ -38,7 +38,7 @@ export class TeachersService {
     return this.teacherRepository.save(updatedTeacher);
   }
 
-  async remove(id: string): Promise<{ message: string }> {
+  async remove(id: number): Promise<{ message: string }> {
     const teacher = await this.findOne(id);
     await this.teacherRepository.remove(teacher);
     return { message: `Teacher with ID ${id} has been removed successfully` };
