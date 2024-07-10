@@ -5,6 +5,7 @@ Este proyecto es un sistema de gestión de aulas desarrollado utilizando React p
 ## Requisitos previos
 
 - NESTJS
+- Express
 - Node.js (v14 o superior)
 - npm o yarn
 - TypeOrm
@@ -13,15 +14,18 @@ Este proyecto es un sistema de gestión de aulas desarrollado utilizando React p
 ## Configuración del proyecto
 Clona el repositorio:
 
-git clone git@github.com:marcelmoldes/PruebaTecnica-server.git
-cd PruebaTecnica-server
-Instala las dependencias:
+1. Clona el repositorio:
+   ```    
+   git clone git@github.com:marcelmoldes/PruebaTecnica-server.git
+    cd PruebaTecnica-server
+
+2. Instala las dependencias:
 
 npm install
-Configura las variables de entorno:
+3. Configura las variables de entorno:
 
 Crea un archivo .env en la raíz del proyecto con el siguiente contenido, ajustando los valores según tu configuración de base de datos:
-
+  ```  
 
 DB_HOST=localhost
 DB_PORT=3306
@@ -32,14 +36,8 @@ Inicia el servidor de desarrollo:
 
 npm run start:dev
 
-
+  ```  
 
 ### Backend
-
-1. Clona el repositorio:
-   ```    
-   
-   git clone git@github.com:marcelmoldes/PruebaTecnica-server.git
-   cd PruebaTecnica-server
 
 
