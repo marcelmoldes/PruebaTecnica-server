@@ -19,17 +19,20 @@ export class ClassService {
     private readonly studentRepository: Repository<Student>,
   ) {}
 
+  // Create a new class
   async create(createClassDto: CreateClassDto): Promise<Class> {
     const newClass = this.classRepository.create(createClassDto);
     return this.classRepository.save(newClass);
   }
 
+  // Retrieve all classes with related teacher and students
   async findAll(): Promise<Class[]> {
     return this.classRepository.find({
       relations: ['teacher', 'students'],
     });
   }
 
+  // Retrieve a class by its ID
   async findOne(id: number): Promise<Class> {
     const classEntity = await this.classRepository.findOne({
       where: { id },
@@ -41,6 +44,7 @@ export class ClassService {
     return classEntity;
   }
 
+  // Update a class by its ID
   async update(
     id: number,
     updateClassDto: Partial<CreateClassDto>,
@@ -49,10 +53,12 @@ export class ClassService {
     return this.findOne(id);
   }
 
+  // Remove a class by its ID
   async remove(id: number): Promise<void> {
     await this.classRepository.delete(id);
   }
 
+  // Assign a teacher to a class
   async assignTeacher(
     id: number,
     assignTeacherDto: AssignTeacherDto,
@@ -70,6 +76,7 @@ export class ClassService {
     return this.classRepository.save(classEntity);
   }
 
+  // Assign students to a class
   async assignStudents(
     id: number,
     assignStudentsDto: AssignStudentsDto,
@@ -90,6 +97,7 @@ export class ClassService {
     return this.classRepository.save(classEntity);
   }
 
+  // Retrieve students of a class by class ID
   async getStudents(id: number): Promise<Student[]> {
     const classEntity = await this.findOne(id);
     return classEntity.students;

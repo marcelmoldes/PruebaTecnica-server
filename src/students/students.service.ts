@@ -9,38 +9,44 @@ import { Student } from './entities/student.entity';
 export class StudentsService {
   constructor(
     @InjectRepository(Student)
-    private readonly StudentRepository: Repository<Student>,
+    private readonly studentRepository: Repository<Student>,
   ) {}
 
+  // Create a new student
   async create(createStudentDto: CreateStudentDto): Promise<Student> {
-    const newStudent = this.StudentRepository.create(createStudentDto);
-    return this.StudentRepository.save(newStudent);
+    const newStudent = this.studentRepository.create(createStudentDto);
+    return this.studentRepository.save(newStudent);
   }
 
+  // Retrieve all students
   async findAll(): Promise<Student[]> {
-    return this.StudentRepository.find();
+    return this.studentRepository.find();
   }
 
+  // Retrieve a student by ID
   async findOne(id: number): Promise<Student> {
-    const student = await this.StudentRepository.findOne({ where: { id } });
-    if (!Student) {
-      throw new NotFoundException(`student with ID ${id} not found`);
+    const student = await this.studentRepository.findOne({ where: { id } });
+    if (!student) {
+      throw new NotFoundException(`Student with ID ${id} not found`);
     }
     return student;
   }
 
+  // Update a student's details by ID
   async update(
     id: number,
     updateStudentDto: UpdateStudentDto,
   ): Promise<Student> {
     const student = await this.findOne(id);
+    // Merge the existing student data with the new data
     const updatedStudent = Object.assign(student, updateStudentDto);
-    return this.StudentRepository.save(updatedStudent);
+    return this.studentRepository.save(updatedStudent);
   }
 
+  // Remove a student by ID
   async remove(id: number): Promise<{ message: string }> {
     const student = await this.findOne(id);
-    await this.StudentRepository.remove(student);
-    return { message: `student with ID ${id} has been removed successfully` };
+    await this.studentRepository.remove(student);
+    return { message: `Student with ID ${id} has been removed successfully` };
   }
 }
